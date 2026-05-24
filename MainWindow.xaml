@@ -1,0 +1,69 @@
+﻿<Window x:Class="QuickSend.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="QuickSend" Height="65" Width="180"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        Topmost="True" ShowInTaskbar="False" ShowActivated="False"
+        AllowDrop="True" Drop="Window_Drop" DragEnter="Window_DragEnter" DragLeave="Window_DragLeave">
+
+    <!-- Cadre principal mis à jour avec une teinte légèrement plus proche de tes images -->
+    <Border x:Name="DropBorder" 
+            Background="#232428" 
+            CornerRadius="6" 
+            BorderBrush="#3E4047" 
+            BorderThickness="1" 
+            Margin="10"
+            Height="42"
+            Width="42"
+            HorizontalAlignment="Left">
+
+        <Border.Effect>
+            <DropShadowEffect Color="Black" BlurRadius="12" ShadowDepth="3" Opacity="0.35" Direction="270"/>
+        </Border.Effect>
+
+        <Grid>
+            <!-- ETAT 1 : REPOS -->
+            <Grid x:Name="IdleState" Background="Transparent">
+                <Path Data="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z" 
+                      Fill="Transparent" Stroke="#D4D4D4" StrokeThickness="1.2" 
+                      Width="16" Height="20" Stretch="Uniform" 
+                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+
+            <!-- ETAT 2 : UPLOAD (Design image_592abd.png) -->
+            <!-- Marges réduites et hauteur ajustée pour remplir l'espace -->
+            <Grid x:Name="UploadState" Visibility="Collapsed" Margin="4">
+                <ProgressBar x:Name="ProgressBar" Minimum="0" Maximum="100" BorderThickness="0" Background="Transparent" VerticalAlignment="Stretch">
+                    <ProgressBar.Template>
+                        <ControlTemplate TargetType="ProgressBar">
+                            <Grid>
+                                <!-- Fond sombre de la barre (Track) -->
+                                <Border Background="#1C1D21" CornerRadius="4"/>
+
+                                <Border x:Name="PART_Track" CornerRadius="4">
+                                    <!-- Bleu correspondant à la maquette -->
+                                    <Border x:Name="PART_Indicator" Background="#285698" CornerRadius="4" HorizontalAlignment="Left"/>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </ProgressBar.Template>
+                </ProgressBar>
+            </Grid>
+
+            <!-- ETAT 3 : SUCCÈS (Design image_592ad7.png) -->
+            <Grid x:Name="SuccessState" Visibility="Collapsed" Margin="4">
+                <!-- Vert vibrant correspondant à la maquette -->
+                <Border Background="#31C042" CornerRadius="4">
+                    <TextBlock Text="Copied" FontFamily="Segoe UI" Foreground="White" FontWeight="Medium" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </Grid>
+
+            <!-- ETAT 4 : ERREUR -->
+            <Grid x:Name="ErrorState" Visibility="Collapsed" Margin="4">
+                <Border Background="#E81123" CornerRadius="4">
+                    <TextBlock x:Name="ErrorText" Text="Failed" FontFamily="Segoe UI" Foreground="White" FontWeight="Medium" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
