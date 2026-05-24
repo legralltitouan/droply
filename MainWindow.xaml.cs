@@ -1,4 +1,5 @@
-﻿using System;
+using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -6,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -15,7 +17,7 @@ namespace QuickSend
 {
     public partial class MainWindow : Window
     {
-        // --- IMPORT DES API NATIVES WINDOWS (Win32) ---
+        // --- IMPORT DES API NATIVES WINDOWS ---
         [DllImport("user32.dll", SetLastError = true)]
         static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
@@ -29,17 +31,14 @@ namespace QuickSend
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT
         {
-            public int Left;
-            public int Top;
-            public int Right;
-            public int Bottom;
+            public int Left; public int Top; public int Right; public int Bottom;
         }
 
         private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
         private const uint SWP_NOSIZE = 0x0001;
         private const uint SWP_NOMOVE = 0x0002;
         private const uint SWP_NOACTIVATE = 0x0010;
-        // ----------------------------------------------
+        // --------------------------------------
 
         private static readonly HttpClient client = new HttpClient();
         private const long MaxFileSizeMB = 20000;
@@ -49,24 +48,85 @@ namespace QuickSend
 
         static MainWindow()
         {
-            client.Timeout = TimeSpan.FromHours(2); // Timeout augmenté pour les très gros fichiers
+            client.Timeout = TimeSpan.FromHours(2);
             client.DefaultRequestHeaders.Clear();
-            client.DefaultRequestHeaders.Add("User-Agent", "QuickSend/1.0");
+            client.DefaultRequestHeaders.Add("User-Agent", "Droply/1.0");
         }
 
         public MainWindow()
         {
             InitializeComponent();
+            RegisterInStartup();
             SetState("Idle");
             this.Loaded += MainWindow_Loaded;
         }
 
+        private void RegisterInStartup()
+        {
+            try
+            {
+                string runKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(runKey, true))
+                {
+                    if (key.GetValue("Droply") == null)
+                    {
+                        string path = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                        key.SetValue("Droply", path);
+                    }
+                }
+            }
+            catch (Exception) { /* Ignoré */ }
+        }
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _taskbarTimer = new DispatcherTimer();
-            _taskbarTimer.Interval = TimeSpan.FromMilliseconds(50);
-            _taskbarTimer.Tick += TaskbarTimer_Tick;
-            _taskbarTimer.Start();
+            // On n'utilise plus _taskbarTimer, on se branche sur le rendu natif
+            CompositionTarget.Rendering += OnRendering;
+        }
+
+        // 2. La nouvelle méthode de mise à jour synchronisée
+        private void OnRendering(object sender, EventArgs e)
+        {
+            IntPtr taskbarHwnd = FindWindow("Shell_TrayWnd", null);
+            if (taskbarHwnd != IntPtr.Zero)
+            {
+                GetWindowRect(taskbarHwnd, out RECT rect);
+
+                PresentationSource source = PresentationSource.FromVisual(this);
+                if (source == null) return;
+
+                double dpiY = source.CompositionTarget.TransformToDevice.M22;
+                double dpiX = source.CompositionTarget.TransformToDevice.M11;
+
+                double logicalTaskbarTop = rect.Top / dpiY;
+                double logicalTaskbarBottom = rect.Bottom / dpiY;
+                double taskbarHeight = logicalTaskbarBottom - logicalTaskbarTop;
+                double logicalScreenHeight = SystemParameters.PrimaryScreenHeight;
+
+                bool isTaskbarVisible = logicalTaskbarTop < (logicalScreenHeight - 5);
+
+                if (isTaskbarVisible)
+                {
+                    if (this.Visibility != Visibility.Visible)
+                        this.Visibility = Visibility.Visible;
+
+                    // Calcul de la position (42 est la hauteur du Border, 10 est la Margin)
+                    double targetTop = logicalTaskbarTop + (taskbarHeight - 42) / 2 - 10;
+                    double targetLeft = (rect.Left / dpiX) + 10;
+
+                    // Optimisation : On ne met à jour que si la position a changé
+                    if (this.Top != targetTop) this.Top = targetTop;
+                    if (this.Left != targetLeft) this.Left = targetLeft;
+
+                    var helper = new WindowInteropHelper(this);
+                    SetWindowPos(helper.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+                }
+                else
+                {
+                    if (this.Visibility != Visibility.Hidden)
+                        this.Visibility = Visibility.Hidden;
+                }
+            }
         }
 
         private void TaskbarTimer_Tick(object sender, EventArgs e)
@@ -92,6 +152,7 @@ namespace QuickSend
                     if (this.Visibility != Visibility.Visible)
                         this.Visibility = Visibility.Visible;
 
+                    // Remis à la taille d'origine (42)
                     this.Top = logicalTaskbarTop + (taskbarHeight - 42) / 2 - 10;
                     this.Left = (rect.Left / dpiX) + 10;
 
@@ -111,18 +172,19 @@ namespace QuickSend
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effects = DragDropEffects.Copy;
-                DropBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(0x28, 0x56, 0x98)); // Bleu design
+                DropBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(0xFF, 0xCA, 0x70)); // Contour orange clair au survol
             }
         }
 
         private void Window_DragLeave(object sender, DragEventArgs e)
         {
-            DropBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(0x3E, 0x40, 0x47)); // Retour couleur initiale
+            // On efface la valeur imposée pour que le XAML reprenne la main
+            DropBorder.ClearValue(Border.BorderBrushProperty);
         }
 
         private async void Window_Drop(object sender, DragEventArgs e)
         {
-            DropBorder.BorderBrush = new SolidColorBrush(Color.FromRgb(0x3E, 0x40, 0x47));
+            DropBorder.ClearValue(Border.BorderBrushProperty);
 
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -157,8 +219,6 @@ namespace QuickSend
             try
             {
                 using var form = new MultipartFormDataContent();
-
-                // CORRECTION CRITIQUE : On utilise un FileStream pour ne pas saturer la RAM avec les gros fichiers
                 using var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
                 using var streamContent = new StreamContent(fileStream);
                 streamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
@@ -166,12 +226,11 @@ namespace QuickSend
 
                 bool isUploading = true;
 
-                // Fausse progression pour animer la barre en attendant la fin de la requête HTTP
                 var progressTask = Task.Run(async () =>
                 {
                     for (int i = 0; i <= 90 && isUploading; i++)
                     {
-                        await Task.Delay(100); // Ralenti un peu pour les plus gros fichiers
+                        await Task.Delay(100);
                         Dispatcher.Invoke(() => ProgressBar.Value = i);
                     }
                 });
@@ -215,6 +274,7 @@ namespace QuickSend
             SuccessState.Visibility = Visibility.Collapsed;
             ErrorState.Visibility = Visibility.Collapsed;
 
+            // Remis à la taille d'origine (140)
             double targetWidth = 42;
 
             switch (state)
@@ -251,6 +311,10 @@ namespace QuickSend
                 Duration = TimeSpan.FromMilliseconds(250),
                 EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseInOut }
             };
+
+            // 🚀 FORCE L'ANIMATION À 60 FPS (WPF limite parfois à 30/15 pour économiser la batterie)
+            Timeline.SetDesiredFrameRate(widthAnimation, 60);
+
             DropBorder.BeginAnimation(FrameworkElement.WidthProperty, widthAnimation);
         }
 
