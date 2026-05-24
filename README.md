@@ -1,10 +1,10 @@
-Here is the complete **README.md** file for your GitHub repository, formatted in Markdown and English.
+C'est noté ! Je mets à jour le README. Voici la version corrigée avec le nom **Droply**.
 
 ---
 
-# QuickSend
+# Droply
 
-**QuickSend** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple.
+**Droply** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple.
 
 ---
 
@@ -19,7 +19,7 @@ Here is the complete **README.md** file for your GitHub repository, formatted in
 ## ✨ Features
 
 * **Drag & Drop Simplicity**: Just drag any file onto the app icon docked above your taskbar.
-* **Instant Sharing**: Automatically uploads your files via [Gofile.io]() and copies the download link to your clipboard.
+* **Instant Sharing**: Automatically uploads your files via [Gofile.io](https://gofile.io/) and copies the download link to your clipboard.
 * **Minimalist Design**: A sleek, dark-themed interface that respects the modern Windows Fluent Design aesthetic.
 * **High Performance**: Uses stream-based processing to handle large files (up to 20GB) without consuming excessive memory.
 * **Unobtrusive**: Discreetly sits above your taskbar, ready whenever you need it.
@@ -30,7 +30,7 @@ Here is the complete **README.md** file for your GitHub repository, formatted in
 
 1. **Launch** the application.
 2. **Drag** a file from your computer.
-3. **Drop** it onto the **QuickSend** icon.
+3. **Drop** it onto the **Droply** icon.
 4. **Wait** for the progress animation to complete.
 5. The **link is copied** automatically to your clipboard!
 
@@ -47,9 +47,9 @@ Here is the complete **README.md** file for your GitHub repository, formatted in
 
 ## 📦 Installation
 
-1. Download the latest release from the [Releases page]().
+1. Download the latest release from the [Releases page](https://www.google.com/search?q=https://github.com/your-username/Droply/releases).
 2. Extract the zip file.
-3. Run `QuickSend.exe`.
+3. Run `Droply.exe`.
 
 ---
 
@@ -70,4 +70,4 @@ This project is licensed under the **MIT License**. See the `LICENSE` file for m
 
 ---
 
-*Note: Ensure you replace `your-username` in the links with your actual GitHub username and add your image files to an `assets/` folder in your repository to make the preview images display correctly.*
+Do you want me to help you adjust the window title in your C# code or the `Title` property in your XAML to reflect the name **Droply**?
