@@ -8,7 +8,7 @@
 
 | Idle State | Uploading | Success |
 | :---: | :---: | :---: |
-| ![Idle State](1.png) | ![Uploading](2.png) | ![Success](3.png) |
+| ![Idle State](assets/1.png) | ![Uploading](assets/2.png) | ![Success](assets/3.png) |
 
 ---
 
