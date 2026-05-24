@@ -18,7 +18,7 @@
 * **Drag & Drop Simplicity**: Just drag any file onto the app icon docked above your taskbar.
 * **Instant Sharing**: Automatically uploads your files via [Gofile.io](https://gofile.io/) and copies the download link to your clipboard.
 * **Minimalist Design**: A sleek, dark-themed interface that respects the modern Windows Fluent Design aesthetic.
-* **High Performance**: Uses stream-based processing to handle large files (up to 20GB) without consuming excessive memory.
+* **High Performance**: Uses stream-based processing to handle large files (up to 2GB) without consuming excessive memory.
 * **Unobtrusive**: Discreetly sits above your taskbar, ready whenever you need it.
 
 ---
