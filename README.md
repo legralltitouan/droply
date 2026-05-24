@@ -1,5 +1,3 @@
-C'est noté ! Je mets à jour le README. Voici la version corrigée avec le nom **Droply**.
-
 ---
 
 # Droply
