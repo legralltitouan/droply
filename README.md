@@ -41,12 +41,18 @@
 
 ---
 
-## 📦 Installation
+## 📦 Installation & Startup
 
 1. Download the latest release from the [Releases page](https://github.com/legralltitouan/Droply/releases).
-2. Extract the zip file to a permanent location (e.g., `C:\Program Files\Droply`).
+2. Extract the zip file to your preferred folder.
 3. Run `Droply.exe`.
-4. **Auto-start**: The application will automatically register itself to launch at Windows startup upon its first run.
+
+**How to start Droply automatically with Windows:**
+If you want Droply to launch every time you turn on your PC:
+1. Press `Windows + R` on your keyboard.
+2. Type `shell:startup` and press `Enter`.
+3. Create a **shortcut** of `Droply.exe` (right-click the file > Create shortcut).
+4. Move this shortcut into the folder that just opened.
 
 ---
 
