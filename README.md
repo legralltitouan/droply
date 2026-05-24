@@ -7,6 +7,8 @@
 
 **Droply** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple.
 
+---
+
 ## 📸 Preview
 
 | Idle State | Uploading | Success |
@@ -44,18 +46,13 @@
 
 ---
 
-## 📦 Installation & Startup
+## 📦 Installation
 
-1. Download the latest release from the [Releases page](https://github.com/legralltitouan/Droply/releases).
-2. Extract the zip file to your preferred folder.
+1. Download the latest `Droply.exe` from the [Releases page](https://github.com/legralltitouan/Droply/releases).
+2. Place the executable in a folder of your choice.
 3. Run `Droply.exe`.
 
-**How to start Droply automatically with Windows:**
-If you want Droply to launch every time you turn on your PC:
-1. Press `Windows + R` on your keyboard.
-2. Type `shell:startup` and press `Enter`.
-3. Create a **shortcut** of `Droply.exe` (right-click the file > Create shortcut).
-4. Move this shortcut into the folder that just opened.
+*Note: Droply automatically registers itself to launch on Windows startup upon its first execution.*
 
 ---
 
