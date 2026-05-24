@@ -8,8 +8,8 @@
 ## 📸 Preview
 
 | Idle State | Uploading | Success |
-| --- | --- | --- |
-|  |  |  |
+| :---: | :---: | :---: |
+| ![Idle State](1.png) | ![Uploading](2.png) | ![Success](3.png) |
 
 ---
 
