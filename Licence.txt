@@ -1,0 +1,24 @@
+Understood. I have updated the license text to include your name, **legralltitouan**, and maintained the specific restrictions you requested.
+
+Here is the final version of the **LICENSE.txt** file for your **Droply** repository:
+
+---
+
+# LICENSE
+
+**Copyright (c) 2026 legralltitouan**
+
+This software, **Droply**, is provided "as is", without warranty of any kind, express or implied.
+
+### Terms of Use:
+
+1. **Non-Commercial Use Only**: You are strictly prohibited from selling this software, or any modified version of this software, for commercial gain. Droply must remain free for all users.
+2. **Modifications & Distribution**: You are allowed to modify the source code for your personal use. However, if you wish to distribute a modified version of this software or include it in another project, **you must contact me (legralltitouan) and obtain my written permission** before doing so.
+3. **Attribution**: If you are granted permission to use or modify the code, you must keep the original copyright notice and give appropriate credit to the original author (legralltitouan).
+4. **No Warranty**: The author is not responsible for any damages or issues arising from the use of this software.
+
+By using or modifying this software, you agree to these terms. If you have any questions or would like to request permission for modifications, please reach out via my GitHub profile.
+
+---
+
+Is there anything else you would like to refine for your project, or are you ready to deploy **Droply** to your GitHub repository?
