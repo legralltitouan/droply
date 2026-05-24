@@ -66,5 +66,3 @@ Contributions are welcome! If you have a suggestion or find a bug, please:
 This project is licensed under the **MIT License**. See the `LICENSE` file for more details.
 
 ---
-
-Do you want me to help you adjust the window title in your C# code or the `Title` property in your XAML to reflect the name **Droply**?
