@@ -1,9 +1,11 @@
-# Droply
-![Main](assets/main.png)
----
-**Droply** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple.
+<h1>
+  <img src="assets/main.png" width="40" style="vertical-align: middle; margin-right: 10px;" alt="Droply Logo" />
+  Droply
+</h1>
 
 ---
+
+**Droply** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple.
 
 ## 📸 Preview
 
