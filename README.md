@@ -1,4 +1,3 @@
-
 # Droply
 
 **Droply** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple.
@@ -9,7 +8,7 @@
 
 | Idle State | Uploading | Success |
 | :---: | :---: | :---: |
-| ![Idle State](1.png) | ![Uploading](2.png) | ![Success](3.png) |
+| ![Idle State](assets/1.png) | ![Uploading](assets/2.png) | ![Success](assets/3.png) |
 
 ---
 
@@ -44,9 +43,10 @@
 
 ## 📦 Installation
 
-1. Download the latest release from the [Releases page](https://www.google.com/search?q=https://github.com/your-username/Droply/releases).
-2. Extract the zip file.
+1. Download the latest release from the [Releases page](https://github.com/legralltitouan/Droply/releases).
+2. Extract the zip file to a permanent location (e.g., `C:\Program Files\Droply`).
 3. Run `Droply.exe`.
+4. **Auto-start**: The application will automatically register itself to launch at Windows startup upon its first run.
 
 ---
 
@@ -54,7 +54,7 @@
 
 Contributions are welcome! If you have a suggestion or find a bug, please:
 
-1. Open an [Issue]().
+1. Open an [Issue](https://github.com/legralltitouan/Droply/issues).
 2. Fork the repository.
 3. Create a branch for your feature.
 4. Submit a Pull Request.
@@ -65,4 +65,5 @@ Contributions are welcome! If you have a suggestion or find a bug, please:
 
 This project is licensed under the **MIT License**. See the `LICENSE` file for more details.
 
----
+**Copyright (c) 2026 legralltitouan**
+*Note: Non-commercial use only. Any modification or distribution of this software requires written permission from legralltitouan.*
