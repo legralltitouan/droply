@@ -1,9 +1,3 @@
-Understood. I have updated the license text to include your name, **legralltitouan**, and maintained the specific restrictions you requested.
-
-Here is the final version of the **LICENSE.txt** file for your **Droply** repository:
-
----
-
 # LICENSE
 
 **Copyright (c) 2026 legralltitouan**
@@ -21,4 +15,3 @@ By using or modifying this software, you agree to these terms. If you have any q
 
 ---
 
-Is there anything else you would like to refine for your project, or are you ready to deploy **Droply** to your GitHub repository?
