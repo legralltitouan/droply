@@ -19,7 +19,7 @@
 ### Context Menu & Settings Panel
 | Context Menu | Settings (Dark Mode) | Settings (Light Mode) |
 | :---: | :---: | :---: |
-| <img src="image_c64788.png" width="250" alt="Context Menu" /> | <img src="image_c5f195.png" width="250" alt="Settings Dark" /> | <img src="image_c74ac9.png" width="250" alt="Settings Light" /> |
+| <img src="assets/4.png" width="250" alt="Context Menu" /> | <img src="assets/5.png" width="250" alt="Settings Dark" /> | <img src="assets/6.png" width="250" alt="Settings Light" /> |
 
 ---
 
@@ -47,7 +47,7 @@
 5. Once complete, the link is copied to your clipboard, and a Discord embed is sent (if configured)!
 
 ### Discord Integration Preview
-<img src="image_c74dd1.png" width="600" alt="Discord Webhook Notification Preview" />
+<img src="assets/7.png" width="600" alt="Discord Webhook Notification Preview" />
 
 ---
 
