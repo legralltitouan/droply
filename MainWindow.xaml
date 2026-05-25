@@ -6,12 +6,57 @@
         Topmost="True" ShowInTaskbar="False" ShowActivated="False"
         AllowDrop="True" Drop="Window_Drop" DragEnter="Window_DragEnter" DragLeave="Window_DragLeave">
 
+    <Window.Resources>
+        <Style x:Key="FluentContextMenu" TargetType="ContextMenu">
+            <Setter Property="Background" Value="{DynamicResource AppBgBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource AppBorderBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource AppTextBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContextMenu">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="1" CornerRadius="8">
+                            <StackPanel IsItemsHost="True" Margin="4"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FluentMenuItem" TargetType="MenuItem">
+            <Setter Property="Foreground" Value="{DynamicResource AppTextBrush}"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Border x:Name="Bg" Background="Transparent" CornerRadius="4">
+                            <TextBlock Text="{TemplateBinding Header}" Foreground="{TemplateBinding Foreground}" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="Background" Value="{DynamicResource AppHoverBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Border x:Name="DropBorder" CornerRadius="8" BorderThickness="1" Margin="10" Height="42" Width="42" HorizontalAlignment="Left">
+
+        <Border.ContextMenu>
+            <ContextMenu Style="{StaticResource FluentContextMenu}">
+                <MenuItem Header="Paramètres" Style="{StaticResource FluentMenuItem}" Click="OpenSettings_Click"/>
+                <MenuItem Header="Quitter" Style="{StaticResource FluentMenuItem}" Click="Quit_Click"/>
+            </ContextMenu>
+        </Border.ContextMenu>
 
         <Border.Style>
             <Style TargetType="Border">
-                <Setter Property="Background" Value="#2A2C31"/>
-                <Setter Property="BorderBrush" Value="#3E4047"/>
+                <Setter Property="Background" Value="{DynamicResource AppBgBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource AppBorderBrush}"/>
 
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Visibility, ElementName=IdleState}" Value="Visible">
@@ -24,7 +69,8 @@
                             <Condition Binding="{Binding Visibility, ElementName=IdleState}" Value="Visible"/>
                             <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True"/>
                         </MultiDataTrigger.Conditions>
-                        <Setter Property="Background" Value="#36373750"/>
+                        <Setter Property="Background" Value="{DynamicResource AppHoverBrush}"/>
+                        <Setter Property="BorderBrush" Value="{DynamicResource AppBorderBrush}"/>
                     </MultiDataTrigger>
                 </Style.Triggers>
             </Style>
@@ -41,12 +87,12 @@
 
             <Grid x:Name="UploadState" Visibility="Collapsed" Margin="8,0,8,0">
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="Uploading..." FontFamily="Segoe UI" Foreground="#FFF4C7A3" FontWeight="Bold" FontSize="11" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                    <TextBlock Text="Uploading..." FontFamily="Segoe UI" Foreground="{DynamicResource AppTextBrush}" FontWeight="Bold" FontSize="11" HorizontalAlignment="Center" Margin="0,0,0,4"/>
                     <ProgressBar x:Name="ProgressBar" Minimum="0" Maximum="100" Height="6" BorderThickness="0" Background="Transparent">
                         <ProgressBar.Template>
                             <ControlTemplate TargetType="ProgressBar">
                                 <Grid>
-                                    <Border Background="#1C1D21" CornerRadius="3"/>
+                                    <Border Background="{DynamicResource AppControlBgBrush}" CornerRadius="3"/>
                                     <Border x:Name="PART_Track" CornerRadius="3">
                                         <Grid x:Name="PART_Indicator" HorizontalAlignment="Left">
                                             <Border CornerRadius="3">
@@ -56,22 +102,6 @@
                                                         <GradientStop Color="#FFED8209" Offset="0.26"/>
                                                         <GradientStop Color="#FFED8209" Offset="1.0"/>
                                                     </LinearGradientBrush>
-                                                </Border.Background>
-                                            </Border>
-                                            <Border CornerRadius="3" Opacity="0.6">
-                                                <Border.Background>
-                                                    <RadialGradientBrush>
-                                                        <GradientStop Color="#FFE05201" Offset="0.14"/>
-                                                        <GradientStop Color="#00509DF5" Offset="0.83"/>
-                                                    </RadialGradientBrush>
-                                                </Border.Background>
-                                            </Border>
-                                            <Border CornerRadius="3" Opacity="0.1">
-                                                <Border.Background>
-                                                    <RadialGradientBrush>
-                                                        <GradientStop Color="#00E05301" Offset="0.28"/>
-                                                        <GradientStop Color="#FFE05500" Offset="1.0"/>
-                                                    </RadialGradientBrush>
                                                 </Border.Background>
                                             </Border>
                                         </Grid>
@@ -92,22 +122,6 @@
                                 <GradientStop Color="#FFED8209" Offset="0.26"/>
                                 <GradientStop Color="#FFED8209" Offset="1.0"/>
                             </LinearGradientBrush>
-                        </Border.Background>
-                    </Border>
-                    <Border CornerRadius="6" Opacity="0.6">
-                        <Border.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="#FFE05201" Offset="0.14"/>
-                                <GradientStop Color="#00509DF5" Offset="0.83"/>
-                            </RadialGradientBrush>
-                        </Border.Background>
-                    </Border>
-                    <Border CornerRadius="6" Opacity="0.1">
-                        <Border.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="#00E05301" Offset="0.28"/>
-                                <GradientStop Color="#FFE05500" Offset="1.0"/>
-                            </RadialGradientBrush>
                         </Border.Background>
                     </Border>
                 </Grid>
