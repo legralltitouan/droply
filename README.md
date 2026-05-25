@@ -5,7 +5,7 @@
 
 ---
 
-**Droply** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple.
+**Droply** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple. Powered by advanced WPF capabilities and native Win32 tracking, it docks perfectly onto your Windows taskbar with fluid animations.
 
 ---
 
@@ -23,28 +23,31 @@
 
 ---
 
-## ✨ Features
+## ✨ Features & Optimizations
 
-* **Drag & Drop Simplicity**: Just drag any file onto the app icon docked above your taskbar.
-* **Instant Sharing**: Automatically uploads your files via [Gofile.io](https://gofile.io/) and copies the download link to your clipboard.
-* **Customization & Themes**: Fully functional toggle between **Dark Mode** and **Light Mode** to match your desktop setup.
-* **Discord Webhook Integration**: Optional field to link a Discord channel webhook. Once an upload finishes, a clean embed notification is automatically sent to your Discord server.
-* **Flexible Startup Control**: Toggle the "Launch at startup" option directly from the settings window to keep your boot sequence clean.
-* **Minimalist Design**: A sleek interface that respects the modern Windows Fluent Design aesthetic, complete with custom "Copied" toast animations.
-* **High Performance**: Uses stream-based processing to handle large files (up to 2GB) without consuming excessive memory.
+* **Drag & Drop Simplicity**: Just drag any file onto the app icon docked right above your Windows taskbar.
+* **Instant Sharing**: Automatically uploads files via [Gofile.io](https://gofile.io/) and copies the secure download link straight to your clipboard.
+* **Smart Frame Throttling (High CPU Optimization)**: Taskbar position recalculations are strictly restricted to 30Hz (33ms intervals). This prevents high-refresh-rate monitors (144Hz to 360Hz+) from causing unnecessary CPU spikes during render updates.
+* **Dynamic Cross-Fade Transitions**: Swapping between window states (*Idle*, *Uploading*, *Success*, *Error*) uses automated opacity cross-fade sequencing coupled with a custom `CubicEase` width expansion curve.
+* **Organic Window Lifecycle**: The Settings panel opens with a modern slide-in effect complete with a subtle elastic bounce (`BackEase`). Closing operations are intercepted to execute an elegant slide-down fade-out sequence prior to window destruction.
+* **Re-engineered Fluent ToggleSwitches**: Checkboxes and toggle elements glide linearly using `TranslateTransform` structures combined with progressive color-fade interpolation instead of rigid state jumps.
+* **Progressive Hover Layers**: Interactive elements and control buttons utilize isolated `HoverLayer` architectures that gradually transition opacity on cursor enter/leave events.
+* **Discord Webhook Integration**: Link an optional Discord webhook to instantly log your uploads with clean, automatic embed cards inside your designated server.
+* **Flexible Startup Control**: Toggle the "Launch at startup" parameter inside the settings UI to seamlessly update the Windows CurrentVersion Registry keys.
+* **Strict Null-Safety Architecture**: Fully optimized for `.NET 10` with explicit `<Nullable>enable</Nullable>` safety compliancy, guaranteeing zero compile-time warnings and maximizing execution robustness.
 
 ---
 
 ## 🚀 How to Use & Configure
 
 1. **Launch** the application.
-2. **Right-click** the system tray or settings icon to open the **Paramètres** (Settings) menu.
+2. **Right-click** the main Droply box to open the **Paramètres** (Settings) context menu.
 3. **Configure your preferences**:
-   * Check **Lancer au démarrage** if you want Droply to open when Windows starts.
-   * Toggle **Mode Clair** to switch interface styles instantly.
-   * Paste your Discord URL into the **Discord Webhook** field for automated notification logging.
-4. **Drag & Drop** any file onto the **Droply** icon to share it.
-5. Once complete, the link is copied to your clipboard, and a Discord embed is sent (if configured)!
+   * Check **Lancer au démarrage** to register the application inside the Windows Startup routine.
+   * Toggle **Mode Clair** to hot-swap interface layouts and runtime styles instantly without graphical hitches.
+   * Paste your Discord webhook link into the **Discord Webhook** text box for secure transaction logging.
+4. **Drag & Drop** any file onto the **Droply** launcher to transmit it.
+5. Once complete, the URL is written to your clipboard and localized animations report the operation outcome!
 
 ### Discord Integration Preview
 <img src="assets/7.png" width="600" alt="Discord Webhook Notification Preview" />
@@ -53,36 +56,37 @@
 
 ## 🛠 Tech Stack
 
-* **Language**: C#
-* **Framework**: WPF (Windows Presentation Foundation)
-* **API**: Gofile.io Upload API & Discord Webhooks
-* **Design**: Fluent Design principles with custom UI animations.
+* **Language**: C# 13 / .NET 10 Windows SDK
+* **Framework**: WPF (Windows Presentation Foundation) with advanced XAML Storyboards
+* **Native Subsystem**: Win32 Interop (`user32.dll` via P/Invoke for system tray monitoring & layout pinning)
+* **API Framework**: Gofile.io Multipart Stream Upload API & Discord Webhook Channels
+* **Design Philosophy**: Microsoft Fluent Design Guidelines (Asynchronous state loops, eased transitions)
 
 ---
 
 ## 📦 Installation
 
-1. Download the latest `Droply.exe` from the [Releases page](https://github.com/legralltitouan/Droply/releases).
-2. Place the executable in a folder of your choice.
-3. Run `Droply.exe`.
-4. *(Optional)* Open the Settings panel to enable the Windows startup shortcut manually.
+1. Download the latest pre-compiled `Droply.exe` package from the [Releases page](https://github.com/legralltitouan/Droply/releases).
+2. Place the standalone executable in any preferred system directory.
+3. Execute `Droply.exe` to dock the utility.
+4. *(Optional)* Use the internal Settings framework to automate system boot launch properties.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you have a suggestion or find a bug, please:
+Contributions are welcome! If you have optimization proposals or encounter bug trends:
 
-1. Open an [Issue](https://github.com/legralltitouan/Droply/issues).
-2. Fork the repository.
-3. Create a branch for your feature.
-4. Submit a Pull Request.
+1. Open a tracking [Issue](https://github.com/legralltitouan/Droply/issues).
+2. Fork this software repository.
+3. Initialize an isolated branch for your proposed feature modification.
+4. Submit a formalized Pull Request for review.
 
 ---
 
 ## 📝 License
 
-This project is licensed under the **MIT License**. See the `LICENSE` file for more details.
+This project is licensed under the terms of the **MIT License**. Check out the `LICENSE` documentation for detailed clauses.
 
 **Copyright (c) 2026 legralltitouan**
 *Note: Non-commercial use only. Any modification or distribution of this software requires written permission from legralltitouan.*
