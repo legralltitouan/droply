@@ -1,11 +1,8 @@
-<h1>
-  <img src="assets/main.png" width="40" style="vertical-align: middle; margin-right: 10px;" alt="Droply Logo" />
-  Droply
-</h1>
+#   <img src="assets/main.png" width="40" style="vertical-align: middle; margin-right: 10px;" alt="Droply Logo" /> Droply
 
 ---
 
-**Droply** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple. Powered by advanced WPF capabilities and native Win32 tracking, it docks perfectly onto your Windows taskbar with fluid animations.
+**Droply** is a lightweight, minimalist Windows utility designed for instant file sharing. Drag, drop, and share—it's that simple. Powered by advanced WPF capabilities and native Win32 tracking, it docks perfectly onto your Windows taskbar with fluid animations. Break past standard limits with a dynamic algorithm capable of handling massive payloads up to **100GB**.
 
 ---
 
@@ -26,7 +23,8 @@
 ## ✨ Features & Optimizations
 
 * **Drag & Drop Simplicity**: Just drag any file onto the app icon docked right above your Windows taskbar.
-* **Instant Sharing**: Automatically uploads files via [Gofile.io](https://gofile.io/) and copies the secure download link straight to your clipboard.
+* **Intelligent File Routing (Up to 100GB)**: The application dynamically calculates your file size before transmission and automatically selects the most optimized API to ensure speed and stability, bypassing traditional 2GB limits entirely.
+* **Instant Sharing**: Automatically uploads files and copies the secure download link straight to your clipboard.
 * **Smart Frame Throttling (High CPU Optimization)**: Taskbar position recalculations are strictly restricted to 30Hz (33ms intervals). This prevents high-refresh-rate monitors (144Hz to 360Hz+) from causing unnecessary CPU spikes during render updates.
 * **Dynamic Cross-Fade Transitions**: Swapping between window states (*Idle*, *Uploading*, *Success*, *Error*) uses automated opacity cross-fade sequencing coupled with a custom `CubicEase` width expansion curve.
 * **Organic Window Lifecycle**: The Settings panel opens with a modern slide-in effect complete with a subtle elastic bounce (`BackEase`). Closing operations are intercepted to execute an elegant slide-down fade-out sequence prior to window destruction.
@@ -35,6 +33,18 @@
 * **Discord Webhook Integration**: Link an optional Discord webhook to instantly log your uploads with clean, automatic embed cards inside your designated server.
 * **Flexible Startup Control**: Toggle the "Launch at startup" parameter inside the settings UI to seamlessly update the Windows CurrentVersion Registry keys.
 * **Strict Null-Safety Architecture**: Fully optimized for `.NET 10` with explicit `<Nullable>enable</Nullable>` safety compliancy, guaranteeing zero compile-time warnings and maximizing execution robustness.
+
+---
+
+## 🔀 Smart Routing Algorithm
+
+Droply uses a multi-tiered backend approach to guarantee your file is uploaded using the best possible service based on its exact byte size:
+
+| File Size | Service Used | Technology / Method |
+| :--- | :--- | :--- |
+| **0 MB – 2 GB** | Gofile.io | Standard Multipart POST |
+| **2 GB – 25 GB** | Storage.to | Cloudflare R2 Presigned Multipart |
+| **25 GB – 100 GB** | Pixeldrain.com | Direct binary stream PUT |
 
 ---
 
@@ -59,7 +69,7 @@
 * **Language**: C# 13 / .NET 10 Windows SDK
 * **Framework**: WPF (Windows Presentation Foundation) with advanced XAML Storyboards
 * **Native Subsystem**: Win32 Interop (`user32.dll` via P/Invoke for system tray monitoring & layout pinning)
-* **API Framework**: Gofile.io Multipart Stream Upload API & Discord Webhook Channels
+* **API Framework**: Dynamic Payload Routing (Gofile.io, Storage.to, Pixeldrain.com), Multipart Stream Uploads & Discord Webhook Channels
 * **Design Philosophy**: Microsoft Fluent Design Guidelines (Asynchronous state loops, eased transitions)
 
 ---
