@@ -41,8 +41,7 @@ Droply automatically picks the best host based on file size:
 | File size | Host | Why |
 |---|---|---|
 | **≤ 2 GB** | gofile.io | Permanent storage, Discord embed |
-| **2 – 25 GB** | storage.to | Cloudflare R2 presigned multipart (real progress bar) |
-| **25 – 100 GB** | pixeldrain.com | Only host supporting up to 100 GB |
+| **2 – 20 GB** | storage.to and pixeldrain.com | Cloudflare R2 presigned multipart (real progress bar) |
 
 ### Cross-PC sync via Discord
 Paste a Discord webhook + bot token + channel ID once. Upload on PC A → toast notification appears on PC B with one-click download. Your own uploads are filtered out by machine name.
