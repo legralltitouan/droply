@@ -33,18 +33,6 @@ Droply is built to feel like a native extension of your operating system. From F
 
 ---
 
-## 🔀 Smart Routing Engine
-
-You never have to worry about file sizes or failed uploads. Droply's dynamic routing guarantees your file is uploaded using the fastest and most stable service available:
-
-| Payload Size | Infrastructure | Best Used For |
-| :--- | :--- | :--- |
-| **0 MB – 2 GB** | **Gofile.io** | Lightning-fast transfers for everyday documents and images. |
-| **2 GB – 25 GB** | **Storage.to** | Heavy media, high-res video projects, and dense archives. |
-| **25 GB – 100 GB** | **Pixeldrain.com** | Massive payloads, raw datasets, and full system backups. |
-
----
-
 ## 🚀 Getting Started
 
 ### 1. Basic Installation & Setup
