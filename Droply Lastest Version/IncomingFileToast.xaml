@@ -1,0 +1,35 @@
+﻿<Window x:Class="Droply.IncomingFileToast"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="340" Height="110" WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent" Topmost="True" ShowInTaskbar="False" ShowActivated="False"
+        ResizeMode="NoResize">
+    <Border CornerRadius="10" Background="{DynamicResource AppBgBrush}"
+            BorderBrush="{DynamicResource AppBorderBrush}" BorderThickness="1" Padding="14,12">
+        <Border.RenderTransform>
+            <TranslateTransform x:Name="SlideXf" X="-80"/>
+        </Border.RenderTransform>
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="24" ShadowDepth="4" Opacity="0.5" Color="Black"/>
+        </Border.Effect>
+        <StackPanel>
+            <TextBlock Text="{DynamicResource L.Toast.Title}" FontFamily="Segoe UI"
+                       FontWeight="SemiBold" FontSize="13" Foreground="{DynamicResource AppTextBrush}"/>
+            <TextBlock Text="{DynamicResource L.Toast.Subtitle}" FontFamily="Segoe UI" FontSize="11"
+                       Foreground="{DynamicResource AppSubTextBrush}" TextWrapping="Wrap"
+                       Margin="0,2,0,10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="IgnoreBtn"
+                    Content="{DynamicResource L.Toast.Ignore}"
+                    Style="{DynamicResource AnimatedSecondaryButton}"
+                    Width="80" Height="26" Margin="0,0,8,0"
+                    Click="Ignore_Click"/>
+                <Button x:Name="DownloadBtn"
+                    Content="{DynamicResource L.Toast.Download}"
+                    Style="{DynamicResource AnimatedPrimaryButton}"
+                    Width="100" Height="26"
+                    Click="Download_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>
